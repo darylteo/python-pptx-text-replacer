@@ -44,7 +44,9 @@ class TextReplacer:
     The text is searched and replaced in all possible places.
     """
  
-    def __init__(self, presentation_file_name,
+    def __init__(self, 
+                 presentation_file_name=None,
+                 presentation=None,
                  tables=True,
                  charts=True,
                  textframes=True,
@@ -55,9 +57,13 @@ class TextReplacer:
         self._replacements = []
         self._collected_replacements = []
         self._presentation_file_name = self._ensure_unicode(presentation_file_name)
-        if not os.path.exists(self._presentation_file_name):
+        if self._presentation_file_name is not None and os.path.exists(self._presentation_file_name):
+            self._presentation = Presentation(presentation_file_name)
+        elif presentation is not None:
+            self._presentation = presentation
+        else:
             raise ValueError("Presentation file %s does not exist." % ( self._presentation_file_name ))
-        self._presentation = Presentation(presentation_file_name)
+        
         self._tables = tables
         self._charts = charts
         self._textframes = textframes
@@ -97,6 +103,7 @@ class TextReplacer:
                     raise ValueError('Slide range %s in list (--slides "%s") is invalid.' % ( r, slides ))
                 for i in range(low-1,high):
                     self._slides[i] = True
+
 
 
     def replace_text(self, replacements, use_regex=False, verbose=None, quiet=None, edit_slide_master=True):
