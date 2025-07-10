@@ -276,12 +276,12 @@ class TextReplacer:
         saved['bold'] = font.bold
         saved['italic'] = font.italic
         saved['underline'] = font.underline
-        saved['color.type'] = font.color.type
-        if font.color.type == MSO_COLOR_TYPE.SCHEME:
-            saved['color.brightness'] = font.color.brightness
-            saved['color.theme_color'] = font.color.theme_color
-        elif font.color.type == MSO_COLOR_TYPE.RGB:
-            saved['color.rgb'] = None if font.color.rgb is None else str(font.color.rgb)
+        # saved['color.type'] = font.color.type
+        # if font.color.type == MSO_COLOR_TYPE.SCHEME:
+        #     saved['color.brightness'] = font.color.brightness
+        #     saved['color.theme_color'] = font.color.theme_color
+        # elif font.color.type == MSO_COLOR_TYPE.RGB:
+        #     saved['color.rgb'] = None if font.color.rgb is None else str(font.color.rgb)
         # saved['fill'] = font.fill
         # saved['language_id'] = font.language_id
         return saved
@@ -293,14 +293,14 @@ class TextReplacer:
         font.bold = saved['bold']
         font.italic = saved['italic']
         font.underline = saved['underline']
-        if saved['color.type'] == MSO_COLOR_TYPE.SCHEME:
-            font.color.brightness = saved['color.brightness']
-            font.color.theme_color = saved['color.theme_color']
-        elif saved['color.type'] == MSO_COLOR_TYPE.RGB:
-            if saved['color.rgb'] is not None:
-                font.color.rgb = RGBColor.from_string(saved['color.rgb'])
-            else:
-                font.color.rgb = None
+        # if saved['color.type'] == MSO_COLOR_TYPE.SCHEME:
+        #     font.color.brightness = saved['color.brightness']
+        #     font.color.theme_color = saved['color.theme_color']
+        # elif saved['color.type'] == MSO_COLOR_TYPE.RGB:
+        #     if saved['color.rgb'] is not None:
+        #         font.color.rgb = RGBColor.from_string(saved['color.rgb'])
+        #     else:
+        #         font.color.rgb = None
         # font.fill = saved['fill']
         # font.language_id = saved['language_id']
 
